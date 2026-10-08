@@ -19,6 +19,8 @@ Daniel 的 Claude Code mod 清單，讓每台電腦都裝到同一套 mod。
 
 別人的 mod 都在 2026-10-08 讀過程式碼：image-view、filetree 不連網；cache-tax 不連網，但開了 `/keepwarm` 會定時送請求、吃額度；source-control 只執行 git、沒有破壞性操作，背景每 10 分鐘 `git fetch` 一次（設定 `fetchIntervalMinutes` 為 0 可關閉），從它的面板 commit 時不會跑專案的 git hooks。
 
+filetree 和 source-control 共用右側面板，用 source-control 那列 Commit 按鈕右邊的 `◨` 切換。
+
 ## 在另一台電腦安裝（例如公司 Mac mini）
 
 repo 是私有的，第一次要先讓那台電腦能讀 GitHub：
