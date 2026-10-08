@@ -13,6 +13,7 @@ Daniel 的 Claude Code mod 清單，讓每台電腦都裝到同一套 mod。
 |---|---|---|---|
 | cache-glance | 自己做的 | 輸入框上方常駐一行快取狀態：還有多久過期、過期後重寫要多少錢 | 無 |
 | task-progress | 自己做的 | 給 Claude 一個回報工具，多步驟工作時把任務清單和進度寫進 cmux 左側欄（只在 cmux 裡啟動；搭配下方的 cmux 側欄） | 無 |
+| auto-panes | 自己做的 | 每次開 Claude Code 等 1.5 秒自動打開右側的 Diff（`/diff`）和 Files（`/filetree`）。Source Control 不自動開：它的 `/git` 打開時會搶走鍵盤，第一個打的字會進 commit 欄，所以用 ◨ 手動開 | 無 |
 | image-view | [jarrodwatts/claude-image-view](https://github.com/jarrodwatts/claude-image-view) | 貼上的圖片在輸入框上方顯示縮圖（需要支援圖片的終端機） | 無 |
 | filetree | [data-goblin/claude-code-filetree](https://github.com/data-goblin/claude-code-filetree) | 右側欄的檔案樹，標出 Claude 正在讀寫的檔案（需要全螢幕模式） | `/filetree` |
 | cache-tax | [karanb192/cache-tax](https://github.com/karanb192/cache-tax) | 快取保溫；閒置過久後的第一則訊息會擋下一次並顯示重寫價格 | `/keepwarm`、`/cache-tax` |
@@ -62,6 +63,7 @@ claude plugin install filetree@claude-mods
 claude plugin install cache-tax@claude-mods
 claude plugin install source-control@claude-mods
 claude plugin install task-progress@claude-mods
+claude plugin install auto-panes@claude-mods
 ```
 
 裝好後重開 Claude Code。要用 task-cards 側欄的話，照上面「cmux 側欄」那段放捷徑。

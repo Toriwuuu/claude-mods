@@ -1,0 +1,7 @@
+{
+  "name": "auto-panes",
+  "version": "0.1.0",
+  "description": "每次開 Claude Code 自動打開右側的 Diff 和 Files 面板（Source Control 用 ◨ 手動開）",
+  "author": { "name": "Daniel Wu" },
+  "types": "./types/index.d.ts"
+}

@@ -19,6 +19,11 @@
       "description": "給 Claude 一個回報工具，把任務清單和進度寫進 cmux 左側欄（搭配 cmux/task-cards.js）"
     },
     {
+      "name": "auto-panes",
+      "source": "./mods/auto-panes",
+      "description": "每次開 Claude Code 自動打開右側的 Diff 和 Files 面板（Source Control 用 ◨ 手動開）"
+    },
+    {
       "name": "image-view",
       "source": {
         "source": "github",
