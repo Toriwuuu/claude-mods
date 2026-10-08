@@ -39,6 +39,16 @@
         "sha": "06cac47ec125a41a4aeeb78a6b006bec8cc6d6ed"
       },
       "description": "快取保溫與過期提醒，/keepwarm、/cache-tax（2026-10-08 審查過的版本）"
+    },
+    {
+      "name": "source-control",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/manuel-will/cc-source-control.git",
+        "path": "source-control",
+        "sha": "f70a2b680b131ee736b9914aa4b9e0f952306373"
+      },
+      "description": "VS Code 風格的原始碼控制：commit 歷史分支圖、暫存、commit、同步，/git（2026-10-08 審查過的版本）"
     }
   ]
 }
