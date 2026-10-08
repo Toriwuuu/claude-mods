@@ -1,0 +1,7 @@
+{
+  "name": "cache-glance",
+  "version": "0.1.0",
+  "description": "輸入框下方常駐一行提示快取狀態：還有多久過期、過期後重寫要多少錢",
+  "author": { "name": "Daniel Wu" },
+  "types": "./types/index.d.ts"
+}

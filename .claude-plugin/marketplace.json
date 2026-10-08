@@ -1,0 +1,44 @@
+{
+  "name": "claude-mods",
+  "owner": {
+    "name": "Daniel Wu",
+    "url": "https://github.com/Toriwuuu"
+  },
+  "metadata": {
+    "description": "Daniel 的 Claude Code mod 清單：自己做的 mod，加上審查過、鎖定版本的別人的 mod"
+  },
+  "plugins": [
+    {
+      "name": "cache-glance",
+      "source": "./mods/cache-glance",
+      "description": "輸入框上方常駐一行快取狀態：還有多久過期、過期後重寫要多少錢"
+    },
+    {
+      "name": "image-view",
+      "source": {
+        "source": "github",
+        "repo": "jarrodwatts/claude-image-view",
+        "sha": "b3c412bb6d167cafade79148e95f9114ee1aad7c"
+      },
+      "description": "貼上的圖片在輸入框上方顯示縮圖（2026-10-08 審查過的版本）"
+    },
+    {
+      "name": "filetree",
+      "source": {
+        "source": "github",
+        "repo": "data-goblin/claude-code-filetree",
+        "sha": "da1da65724c54541f4a0ec5ddd26641b1a0d672a"
+      },
+      "description": "右側欄的檔案樹，標出 Claude 正在讀寫的檔案（2026-10-08 審查過的版本）"
+    },
+    {
+      "name": "cache-tax",
+      "source": {
+        "source": "github",
+        "repo": "karanb192/cache-tax",
+        "sha": "06cac47ec125a41a4aeeb78a6b006bec8cc6d6ed"
+      },
+      "description": "快取保溫與過期提醒，/keepwarm、/cache-tax（2026-10-08 審查過的版本）"
+    }
+  ]
+}
