@@ -59,6 +59,16 @@
         "sha": "f70a2b680b131ee736b9914aa4b9e0f952306373"
       },
       "description": "VS Code 風格的原始碼控制：commit 歷史分支圖、暫存、commit、同步，/git（2026-10-08 審查過的版本）"
+    },
+    {
+      "name": "next-steps",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/anthropics/claude-plugins-community.git",
+        "path": "next-steps",
+        "sha": "f60f0454df3045f724c43c6346ec80bdcc3472b2"
+      },
+      "description": "每次回覆後在輸入框上方給最多三個下一步建議，按 1、2、3 填進對話框（2026-10-08 審查過的版本）"
     }
   ]
 }

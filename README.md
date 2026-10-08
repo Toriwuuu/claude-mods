@@ -17,9 +17,10 @@ Daniel 的 Claude Code mod 清單，讓每台電腦都裝到同一套 mod。
 | image-view | [jarrodwatts/claude-image-view](https://github.com/jarrodwatts/claude-image-view) | 貼上的圖片在輸入框上方顯示縮圖（需要支援圖片的終端機） | 無 |
 | filetree | [data-goblin/claude-code-filetree](https://github.com/data-goblin/claude-code-filetree) | 右側欄的檔案樹，標出 Claude 正在讀寫的檔案（需要全螢幕模式） | `/filetree` |
 | cache-tax | [karanb192/cache-tax](https://github.com/karanb192/cache-tax) | 快取保溫；閒置過久後的第一則訊息會擋下一次並顯示重寫價格 | `/keepwarm`、`/cache-tax` |
+| next-steps | [anthropics/claude-plugins-community](https://github.com/anthropics/claude-plugins-community/tree/main/next-steps)（Thariq Shihipar） | 每次回覆後在輸入框上方給最多三個下一步建議；對話框是空的時按 1、2、3 填進去，再按 Enter 送出，0 關掉，Tab 採用第一個。不會自己送出 | 無 |
 | source-control | [manuel-will/cc-source-control](https://github.com/manuel-will/cc-source-control) | VS Code 風格的原始碼控制：commit 歷史分支圖、暫存、commit、同步（介面只有英文、德文） | `/git` |
 
-別人的 mod 都在 2026-10-08 讀過程式碼：image-view、filetree 不連網；cache-tax 不連網，但開了 `/keepwarm` 會定時送請求、吃額度；source-control 只執行 git、沒有破壞性操作，背景每 10 分鐘 `git fetch` 一次（設定 `fetchIntervalMinutes` 為 0 可關閉），從它的面板 commit 時不會跑專案的 git hooks。
+別人的 mod 都在 2026-10-08 讀過程式碼：image-view、filetree 不連網；cache-tax 不連網，但開了 `/keepwarm` 會定時送請求、吃額度；source-control 只執行 git、沒有破壞性操作，背景每 10 分鐘 `git fetch` 一次（設定 `fetchIntervalMinutes` 為 0 可關閉），從它的面板 commit 時不會跑專案的 git hooks；next-steps 只讀指令清單、填對話框，不連網、不執行程式，但每輪回覆後會送一次分身請求問建議，對話越長這次請求越貴（讀一次整段快取，跟一次保溫差不多）。
 
 filetree 和 source-control 共用右側面板，用 source-control 那列 Commit 按鈕右邊的 `◨` 切換。
 
@@ -64,6 +65,7 @@ claude plugin install cache-tax@claude-mods
 claude plugin install source-control@claude-mods
 claude plugin install task-progress@claude-mods
 claude plugin install auto-panes@claude-mods
+claude plugin install next-steps@claude-mods
 ```
 
 裝好後重開 Claude Code。要用 task-cards 側欄的話，照上面「cmux 側欄」那段放捷徑。
