@@ -12,6 +12,7 @@ Daniel 的 Claude Code mod 清單，讓每台電腦都裝到同一套 mod。
 | mod | 來源 | 做什麼 | 指令 |
 |---|---|---|---|
 | cache-glance | 自己做的 | 輸入框上方常駐一行快取狀態：還有多久過期、過期後重寫要多少錢 | 無 |
+| task-progress | 自己做的 | 給 Claude 一個回報工具，多步驟工作時把任務清單和進度寫進 cmux 左側欄（只在 cmux 裡啟動；搭配下方的 cmux 側欄） | 無 |
 | image-view | [jarrodwatts/claude-image-view](https://github.com/jarrodwatts/claude-image-view) | 貼上的圖片在輸入框上方顯示縮圖（需要支援圖片的終端機） | 無 |
 | filetree | [data-goblin/claude-code-filetree](https://github.com/data-goblin/claude-code-filetree) | 右側欄的檔案樹，標出 Claude 正在讀寫的檔案（需要全螢幕模式） | `/filetree` |
 | cache-tax | [karanb192/cache-tax](https://github.com/karanb192/cache-tax) | 快取保溫；閒置過久後的第一則訊息會擋下一次並顯示重寫價格 | `/keepwarm`、`/cache-tax` |
@@ -20,6 +21,27 @@ Daniel 的 Claude Code mod 清單，讓每台電腦都裝到同一套 mod。
 別人的 mod 都在 2026-10-08 讀過程式碼：image-view、filetree 不連網；cache-tax 不連網，但開了 `/keepwarm` 會定時送請求、吃額度；source-control 只執行 git、沒有破壞性操作，背景每 10 分鐘 `git fetch` 一次（設定 `fetchIntervalMinutes` 為 0 可關閉），從它的面板 commit 時不會跑專案的 git hooks。
 
 filetree 和 source-control 共用右側面板，用 source-control 那列 Commit 按鈕右邊的 `◨` 切換。
+
+## cmux 側欄：task-cards
+
+`cmux/task-cards.js` 是 cmux 的自訂左側欄（cmux 的 Custom Sidebars beta 功能），不是 Claude Code 的 mod。它照 cmux 內建的 `workspaces` 範本改，每個工作區一張卡片，把「最後一則訊息」換成 task-progress 寫進來的任務清單：
+
+- 選取中的工作區：列出每一步（✓ 完成、▸ 進行中、· 還沒做）
+- 其他工作區：進度條＋目前做到哪一步
+- 沒有清單時：顯示 Claude 的狀態（工作中、等你回覆、閒置）
+
+task-progress 把清單寫在工作區的「描述」、摘要寫在「進度」。換回 cmux 預設側欄時，這兩項也會顯示在工作區下面。
+
+安裝：在 `~/.config/cmux/sidebars/` 放一個捷徑，再到 cmux 側欄切換鈕上按右鍵，選 **task-cards**。
+
+```bash
+mkdir -p ~/.config/cmux/sidebars
+# 主力電腦（清單在 ~/claude-mods）
+ln -s ~/claude-mods/cmux/task-cards.js ~/.config/cmux/sidebars/
+# 其他電腦（清單是從 GitHub 加的，放在 Claude Code 的下載資料夾）
+ln -s ~/.claude/plugins/marketplaces/claude-mods/cmux/task-cards.js ~/.config/cmux/sidebars/
+cmux sidebar validate task-cards
+```
 
 ## 在另一台電腦安裝（例如公司 Mac mini）
 
@@ -39,9 +61,10 @@ claude plugin install image-view@claude-mods
 claude plugin install filetree@claude-mods
 claude plugin install cache-tax@claude-mods
 claude plugin install source-control@claude-mods
+claude plugin install task-progress@claude-mods
 ```
 
-裝好後重開 Claude Code。
+裝好後重開 Claude Code。要用 task-cards 側欄的話，照上面「cmux 側欄」那段放捷徑。
 
 ## 更新
 

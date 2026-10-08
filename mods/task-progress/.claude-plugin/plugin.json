@@ -1,0 +1,7 @@
+{
+  "name": "task-progress",
+  "version": "0.1.0",
+  "description": "給 Claude 一個回報工具，把任務清單和進度寫進 cmux 左側欄",
+  "author": { "name": "Daniel Wu" },
+  "types": "./types/index.d.ts"
+}
