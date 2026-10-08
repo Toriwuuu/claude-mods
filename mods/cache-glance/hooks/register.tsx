@@ -76,6 +76,18 @@ export const register: Register = on => {
     return yield* next(e)
   })
 
+  // A fork of the main conversation (cache-tax's keepwarm ping is one) reads the
+  // same cache; when it did read it, the clock starts over just as for a turn.
+  on('model.fork', async ($, e, next) => {
+    const result = await next(e)
+    const answer = 'value' in result ? result.value : undefined
+    if (answer?.isAnswered && answer.usage.cache_read_input_tokens > 0) {
+      const now = await $.clock.now()
+      await update($, lastRequestAt, () => now)
+    }
+    return result
+  })
+
   on('turn.complete', async ($, e, next) => {
     const result = await next(e)
     if (e.agentId) return result

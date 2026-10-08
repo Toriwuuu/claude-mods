@@ -84,6 +84,39 @@ test('above the prompt: counts down from the last reply, then turns cold in the 
   await ui.unmount()
 })
 
+// Stands in for cache-tax: sends its keepwarm ping, a fork of the conversation, when asked.
+const PINGER = {
+  name: 'pinger',
+  register: (on: On) => {
+    on('prompt.submit', async ($, e, next) => {
+      await $.model.fork({ prompt: 'Reply with the single word: warm' })
+      return next(e)
+    })
+  },
+}
+
+test('a keepwarm ping that reads the cache starts the countdown over', { plugins: [PINGER] }, async ($, on) => {
+  const clock = engine(on)
+  on('prompt.submit', (_$, e) => ({ text: e.text }))
+  // cache-tax's ping: a fork of the conversation that reads the whole cache.
+  on('model.fork', () => ({
+    value: {
+      isAnswered: true,
+      text: 'warm',
+      usage: { input_tokens: 12, output_tokens: 2, cache_read_input_tokens: CTX, cache_creation_input_tokens: 0 },
+    },
+  }))
+  await $.session.start({ cwd: '/tmp', surface: 'terminal', isInteractive: true })
+  await $.classic.SessionStart({ source: 'resume', seconds_since_last_response: 13 * 60, context_tokens: CTX, model: OPUS })
+
+  await clock.advance(40 * MINUTE)
+  await $.prompt.submit({ text: 'ping' } as never)
+
+  const ui = await $.ui.mount({ plugin: 'cache-glance', surface: 'terminal', ...BAND })
+  expect((await ui.find({ key: 'cache-glance' }))?.text).toBe('快取 warm · 1h 0m 後過期 · 過期重寫約 $3.91')
+  await ui.unmount()
+})
+
 test('the line steps aside for a survey', async ($, on) => {
   engine(on)
   await $.session.start({ cwd: '/tmp', surface: 'terminal', isInteractive: true })
